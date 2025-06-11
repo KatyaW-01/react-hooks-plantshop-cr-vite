@@ -6,9 +6,10 @@ import '@testing-library/jest-dom';
 describe('4th Deliverable', () => {
   test('filters plants by name on search', async () => {
     global.setFetchResponse(global.basePlants)
-    const { getByPlaceholderText, queryAllByTestId } = render(<App />);
+    const { getByPlaceholderText, findAllByTestId, queryAllByTestId } = render(<App />);
+    await findAllByTestId('plant-item')
     const searchInput = getByPlaceholderText('Type a name to search...');
-    fireEvent.change(searchInput, { target: { value: 'aloe' } });
+    fireEvent.change(searchInput, { target: { value: 'ZZ Plant' } });
 
     await waitFor(() => {
       const filteredPlants = queryAllByTestId('plant-item');
