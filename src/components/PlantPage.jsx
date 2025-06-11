@@ -6,6 +6,7 @@ import Search from "./Search";
 
 function PlantPage() {
   const [plants, setPlants] = useState(null)
+  const [formData, setFormData] = useState({name: "", image: "", price: ""})
 
   useEffect(() => {
     loadPlantData()
@@ -23,7 +24,7 @@ function PlantPage() {
   
   return (
     <main>
-      <NewPlantForm />
+      <NewPlantForm formData={formData} setFormData={setFormData} setPlants={setPlants}/>
       <Search />
       <PlantList plants={plants} />
     </main>
