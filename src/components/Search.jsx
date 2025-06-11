@@ -3,10 +3,12 @@ import { useState } from 'react'
 
 function Search({setPlants, allPlants}) {
   const [searchTerm, setSearchTerm] = useState("")
-
+  console.log(allPlants)
   function handleChange(event) {
     const value = event.target.value
     setSearchTerm(value)
+
+    if (!allPlants) return
 
     if(value.trim() === "") {
       setPlants(allPlants)
