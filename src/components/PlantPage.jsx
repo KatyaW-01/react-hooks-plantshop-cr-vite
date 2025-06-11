@@ -20,12 +20,12 @@ function PlantPage() {
       console.log('Failed to load plant data', error)
     }
   }
-
+  
   return (
     <main>
       <NewPlantForm />
       <Search />
-      <PlantList plants={plants} setPlants={setPlants}/>
+      <PlantList plants={plants} />
     </main>
   );
 }
