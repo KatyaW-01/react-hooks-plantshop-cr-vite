@@ -9,15 +9,29 @@ function NewPlantForm({formData, setFormData, setPlants}) {
     }))
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    console.log("form data:",formData)
+    
     const newPlant = {
       ...formData,
-      id: Date.now()
     }
 
-    setPlants(prevPlants => [...prevPlants, newPlant]);
+    try {
+      const response = await fetch("http://localhost:6001/plants", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newPlant)
+      });
+      if (!response.ok) {
+        throw new Error (`Error! Status: ${response.status}`)
+      }
+      const addedPlant = await response.json()
+      setPlants(prevPlants => [...prevPlants, addedPlant]);
+    } catch (error) {
+      console.error("Error adding plant:", error)
+    }
   }
 
   return (
